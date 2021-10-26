@@ -1,0 +1,32 @@
+.todoHead{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 1rem;
+}
+.firstp{
+    font-size: 2rem;
+    font-weight: bold;
+    color: lightskyblue;
+    
+}
+.secondp{
+    font-size: 2rem;
+    display: flex;
+    width: 40px;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    height: 40px;
+    background-color: purple;
+    border-radius: 50%;
+    color: white;
+}
+.horaire{
+    font-size: 1.5rem;
+    font-weight: 750;
+}
+.addTodo{
+    display: flex;
+    justify-content: space-evenly;
+}
