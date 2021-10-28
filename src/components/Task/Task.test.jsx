@@ -6,3 +6,4 @@ test('Render the Checkbox component', () => {
 
     expect(renderer).toMatchSnapshot()
 })
+

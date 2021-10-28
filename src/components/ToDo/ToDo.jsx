@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Task from '../Task/Task';
 import style from './ToDo.module.css'
@@ -9,10 +9,8 @@ import AddTodo from '../AddTodo/AddTodo';
 
 const ToDo = (props) => {
     const [idNumber, setIdNumber] = useState(0)
-    const [query, setQuery] = useState([{}])
-    const [styleOfInput, setStyleOfInput] = useState(style.validInput)
-    const [styleOfBtn, setStyleOfBtn] = useState(style.btndisabled)
-    const [disableBtn, setDisableBtn] = useState(true)
+    const [query, setQuery] = useState([])
+    
     
 
     let dateObject = new Date();
@@ -21,15 +19,9 @@ const ToDo = (props) => {
     let dateDay = dayDate + '/' + monthDate + ' à ' + dateObject.getHours() + 'h'
 
     const handleAddTodo = (inputText) => {
-
-        console.log('La query',query)
-
-        
         setQuery([...query, {id: query.length + 1, inputText: inputText, dateDay: dateDay}])
-
-        
     }
-
+    
     const onDragEnd = (result) => {
         if (!result.destination) {
             return;
@@ -37,19 +29,16 @@ const ToDo = (props) => {
         
         const newItems = [...query];
         const [removed] = newItems.splice(result.source.index, 1);
-        
         const removeElem = [...query]
-
+        
         newItems.splice(result.destination.index, 0, removed);
         setQuery(newItems)
-        if(result.destination.droppableId == "onRemoveDragEnd"){
-            console.log('result.destination.index',result.destination.index)
+        
+        if(result.destination.droppableId === "onRemoveDragEnd"){
             removeElem.splice(result.destination.index, 1)
             setQuery(removeElem)
-            console.log('Deuxième query',removeElem)
         }
-        console.log('Source index',result.source.index)
-        console.log('Destination',result.destination)
+        
     }
 
     const onRemoveDragEnd = (result) => {
@@ -76,7 +65,8 @@ const ToDo = (props) => {
                 {(provided, snapshot) => (
                     
                     <div {...provided.droppableProps} ref={provided.innerRef}>
-                        {query.map((item,index)=>(
+                        
+                        {query && query.map((item,index)=>(
                                 
                             <Draggable key={item.id} draggableId={item.id !== undefined ? item.id.toString() : '0'} index={index}>
                                 {(provided, snapshot) => (
@@ -108,5 +98,14 @@ const ToDo = (props) => {
     );
 };
 
-export default ToDo;
+ToDo.propTypes = {
+    horaire: PropTypes.string,
+    idNumber: PropTypes.number,
+    query: PropTypes.string,
+    disableBtn: PropTypes.bool,
+    dateObject: PropTypes.object,
+    monthDate: PropTypes.string,
+    dateDay: PropTypes.string,
+}
 
+export default ToDo;

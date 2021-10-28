@@ -1,0 +1,66 @@
+form{
+    display: flex;
+    align-items: center;
+}
+
+.addTodo{
+    display: flex;
+    background: #e5b6be;
+    justify-content: space-around;
+    margin: auto;
+}
+
+.addTodo input{
+    padding: 1rem 1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    border: none;
+    margin-top: 1rem;
+}
+
+.btn{
+    color: white;
+    font-size: 1rem;
+    padding: 9px 12px;
+    margin: 1rem;
+    border: 0px;
+    border-radius: 12px;
+    background: #ff6b85;
+}
+
+
+.validInput{
+    padding: 1rem 1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    border: none;
+    margin-top: 1rem;
+}
+
+.invalidInput{
+    border: 3px solid red;
+    padding: 1rem 1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.btn{
+    color: white;
+    font-size: 1rem;
+    padding: 9px 12px;
+    margin: 1rem;
+    border: 0px;
+    border-radius: 12px;
+    background: #ff6b85;
+}
+
+.btndisabled{
+    background: rgba(128, 128, 128, 0.336);
+    color: white;
+    font-size: 1rem;
+    padding: 9px 12px;
+    margin: 1rem;
+    border: 0px;
+    border-radius: 12px;
+}

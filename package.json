@@ -57,6 +57,10 @@
     "@storybook/preset-create-react-app": "^3.2.0",
     "@storybook/react": "^6.3.12",
     "@testing-library/dom": "^8.10.1",
-    "@testing-library/user-event": "^12.8.3"
+    "@testing-library/user-event": "^12.8.3",
+    "msw": "^0.35.0"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
