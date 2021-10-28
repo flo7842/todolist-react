@@ -1,58 +1,58 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render the Checkbox component 1`] = `
+exports[`Render Layout 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
       <div>
         <div
-          class="container"
+          class="todoHead"
         >
-          <div
-            class="todo"
+          <p
+            class="firstp"
           >
-            <h1 />
-            <p>
-              Ajouté le 
-              26/10 à 14h
-            </p>
-          </div>
-          <div
-            class="checkboxSection"
+            TODOLIST
+          </p>
+          <p
+            class="secondp"
           >
-            <input
-              data-testid="custom-element"
-              type="checkbox"
-            />
-          </div>
+            T
+          </p>
         </div>
+      </div>
+      <div
+        class="footer"
+      >
+        <p>
+          @Agence.Freya
+        </p>
       </div>
     </div>
   </body>,
   "container": <div>
     <div>
       <div
-        class="container"
+        class="todoHead"
       >
-        <div
-          class="todo"
+        <p
+          class="firstp"
         >
-          <h1 />
-          <p>
-            Ajouté le 
-            26/10 à 14h
-          </p>
-        </div>
-        <div
-          class="checkboxSection"
+          TODOLIST
+        </p>
+        <p
+          class="secondp"
         >
-          <input
-            data-testid="custom-element"
-            type="checkbox"
-          />
-        </div>
+          T
+        </p>
       </div>
+    </div>
+    <div
+      class="footer"
+    >
+      <p>
+        @Agence.Freya
+      </p>
     </div>
   </div>,
   "debug": [Function],

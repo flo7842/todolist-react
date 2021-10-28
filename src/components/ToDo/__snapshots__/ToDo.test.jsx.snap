@@ -16,37 +16,19 @@ Object {
             <input
               placeholder="Aujourd'hui je fais..."
               type="text"
+              value=""
             />
-            <button
-              class="btn"
-              type="button"
-            >
-              Ajouter
-            </button>
-          </form>
-        </div>
-        <div>
-          <div
-            class="container"
-          >
-            <div
-              class="todo"
-            >
-              <h1>
-                Une appli react
-              </h1>
-              <p>
-                11/09/2021
-              </p>
-            </div>
             <div
               class="checkboxSection"
             >
-              <input
-                type="checkbox"
-              />
+              <button
+                class="btn"
+                type="button"
+              >
+                Ajouter
+              </button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
@@ -63,37 +45,19 @@ Object {
           <input
             placeholder="Aujourd'hui je fais..."
             type="text"
+            value=""
           />
-          <button
-            class="btn"
-            type="button"
-          >
-            Ajouter
-          </button>
-        </form>
-      </div>
-      <div>
-        <div
-          class="container"
-        >
-          <div
-            class="todo"
-          >
-            <h1>
-              Une appli react
-            </h1>
-            <p>
-              11/09/2021
-            </p>
-          </div>
           <div
             class="checkboxSection"
           >
-            <input
-              type="checkbox"
-            />
+            <button
+              class="btn"
+              type="button"
+            >
+              Ajouter
+            </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>,

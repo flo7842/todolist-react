@@ -14,11 +14,23 @@
 }
 
 .taskChecked{
-    background: crimson;
+    display: flex;
+    margin: auto;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    box-shadow: 2px 3px 2px 1px #155724;
+    border: 1px solid darkgrey;
+    padding: 4px 12px;
+    border-radius: 10px;
+    width: 90%;
 }
 
 h1{
     font-size: 1.2rem;
+    text-align: left;
 }
 
 .todo{

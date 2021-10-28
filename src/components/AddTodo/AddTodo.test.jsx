@@ -1,7 +1,6 @@
 import { render, screen } from "@testing-library/react"
 import userEvent from '@testing-library/user-event'
-import Checkbox from "./Checkbox";
-
+import Checkbox from "../Checkbox/Checkbox";
 
 test('Render Component Footer', () => {
     const renderer = render(<Checkbox />);

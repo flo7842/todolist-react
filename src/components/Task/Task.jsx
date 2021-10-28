@@ -6,21 +6,32 @@ const Task = (props) => {
 
     const [todo, setTodo] = useState(false)
 
+    const {inputText, dateDay} = props.item
+
     const handleClick = () => {
         setTodo(!todo)
     }
+
+
     
     return (
+
         <div>
-            <div className={style.container}>
-                <div className={todo ? style.taskChecked : style.todo}>
-                    <h1>Une appli react</h1>
-                    <p>11/09/2021</p>
-                </div>
-                <Checkbox clickHandler={handleClick}/>
-            </div>
+            {
+                inputText && inputText.length > 1 || inputText !== undefined ? 
+                <div className={todo ? style.taskChecked : style.container}>
+                    <div>
+                        <h1>{inputText}</h1>
+                        <p>Ajouté le {dateDay}</p>
+                    </div>
+                    <Checkbox clickHandler={handleClick}/>
+                </div> : 'Aucune tache définis'
+            }
+            
         </div>
+        
     );
 };
+
 
 export default Task;
