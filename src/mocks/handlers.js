@@ -1,4 +1,4 @@
-import { rest } from 'msw'
+import { setupWorker, rest } from 'msw'
 
 export const handlers = [
     rest.post('/login', (req, res, ctx) => {
@@ -28,4 +28,20 @@ export const handlers = [
             }),
         )
     }),
+
+    rest.post('/task', (req, res, ctx) => {
+        
+        
+        return res(
+            ctx.json(req.body)
+        )
+    }),
+
+    rest.put('/task/:id', (req, res, ctx) => {
+        
+        
+        return res(
+            ctx.json(req.body)
+        )
+    })
 ]

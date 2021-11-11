@@ -6,7 +6,7 @@ const Button = (props) => {
 
     return (
         <div className={style.checkboxSection}>
-            <button className={props.btnStyle} onClick={props.onHandleClick} type="button" disabled={props.disableBtn}>Ajouter</button>
+            <button className={props.btnStyle} onClick={props.postLogin} type="button" disabled={props.disableBtn}>Ajouter</button>
         </div>
     );
 };
