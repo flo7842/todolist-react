@@ -19,14 +19,25 @@ const ToDo = (props) => {
     let dateDay = dayDate + '/' + monthDate + ' à ' + dateObject.getHours() + 'h'
 
     const fetchUser = async () => {
-        const response = await fetch('http://localhost:8000/api/tasks')
+        const response = await fetch('http://localhost:8000/api/tasks', { 
+            method: 'GET', 
+            headers: new Headers({
+              'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2MzY2MzM3OTgsImV4cCI6MTYzNjYzNzM5OCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiYmV2ZXJseTA1QGJlcmduYXVtLmNvbSJ9.Y6KeczFYCYL8J1Rcvtj92vFQ2JXGKvtuYAYiq2XP9sGJ4oAhdi0WmDnNk-TS7tfpKvMUTzi4Vc2QnUUsJ8IcTDGF8fAp9t20EW4YUTZ7YA9xczP3UsMCNPOqS6ZhrU9XB2NVCMT8826cXSv4gmLitfqV-TekPdVnIHy8UZl0DHmQD_QxY-2O0h0lKJa8ki9Sf-1-NRqYOZRmj35lrADybZaASqeyus99IdAu-hcz9DRx-X2TGEHEToEQaKYEca8xtZxkG1xCpHMpqMJIt6j3i8GLCvY4whoWNfPtRZfvQZGVVXx5yMtDh0-VP77jE3RM0z0a0OIVeDrXVFNnRw-hYQ', 
+              'Content-Type': 'application/json'
+            })}) 
+        
         if(!response.ok) {
           throw Error("Une erreur est survenue, veuillez réesayer")
         }
         return response.json()
     }
     useEffect(() => {
-        fetchUser().then(task => setQuery(task))
+        fetchUser().then(tasks => {
+            
+                setQuery(tasks['hydra:member'])
+             
+            
+        })
     }, []);
     
     const handleAddTodo = (inputText) => {
@@ -60,20 +71,8 @@ const ToDo = (props) => {
         let newArr = [...query]; // copying the old datas array
         console.log('newArr 1', newArr);
         let item = {id: index, inputText: input, dateDay: dateDay}; // replace e.target.value with whatever you want to change it to
-        //console.log('newArr[index]', newArr[index])
         newArr[newArr.findIndex(el => el.id === item.id)] = item;
-        // let i = newArr.findIndex(x => x.id === index)
-        // const [removed] = newArr.splice(i, 1);
-        // console.log('newArr 2', newArr);
         
-        // console.log('removed', removed)
-       
-        // console.log('i', i)
-        // newArr.splice(i-1, 1, removed)
-        // //newArr.splice(index, 1)
-        
-        // console.log('newArr 4', newArr);
-        // console.log('query2', query);
         setQuery(newArr);
     }
 

@@ -6,7 +6,7 @@ const Checkbox = (props) => {
 
     return (
         <div className={style.checkboxSection}>
-            <input type="checkbox" onClick={props.clickHandler} data-testid="custom-element" />
+            <input type="checkbox" onClick={props.clickHandler} checked={props.isChecked ? true : false} data-testid="custom-element" />
         </div>
     );
 };

@@ -46,29 +46,34 @@ const Task = (props) => {
     }
 
     useEffect(() => {
-        
+        console.log('props get', props.item.title)
     })
+
+    var d = new Date(props.item.createdAt);
+    var n = d.toLocaleString('fr-FR');
+    var dateFrSplit = n.split(",")
+    var dateFr = dateFrSplit.join(" à")
     
 
     return (
 
         <div className={style.taskContainer}>
             { props.item &&
-                props.item.inputText && props.item.inputText.length > 1 && props.item.inputText !== undefined ? 
+                props.item.title && props.item.title.length > 1 && props.item.title !== undefined ? 
                 <div className={todo ? style.taskChecked : style.container}>
                     <div>
-                        <h1 onDoubleClick={dblClickTask} className={todoTitle}>{props.item.inputText}</h1>
+                        <h1 onDoubleClick={dblClickTask} className={todoTitle}>{props.item.title}</h1>
                         <InputEdit 
                             dblClickTask={dblClickTask}
                             handleChange={handleChange}
                             visibleInput={visibleInput}
                             updateTask={updateTask}
-                            todoTitleItem={props.item.inputText}
+                            todoTitleItem={props.item.title}
                             visibleBtn={visibleBtn}
                         />
-                        <p className={style.addedAt}>Ajouté le {props.item.dateDay}</p>
+                        <p className={style.addedAt}>Ajouté le {dateFr}</p>
                     </div>
-                    <Checkbox clickHandler={handleClick}/>
+                    <Checkbox clickHandler={handleClick} isChecked={props.item.status}/>
                 </div> : 'Aucune tache définis'
             }
         </div>
