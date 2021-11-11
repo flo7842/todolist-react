@@ -1,0 +1,16 @@
+.secondp{
+    font-size: 2rem;
+    display: flex;
+    width: 40px;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    height: 40px;
+    background-color: purple;
+    border-radius: 50%;
+    color: white;
+}
+
+.navbar ul li{
+    list-style-type: none;
+}
