@@ -26,8 +26,38 @@ h1{
     margin: auto;
 }
 
-.onDragDelete{
-    background: red;
-    width: 100%;
-    height: 200px;
+.onDragDelete {
+    width: 95%;
+    height: 150px;
+    margin: auto;
+    display: flex;
+    position: relative;
+    border-radius: 12px;
+}
+.onDragDelete:hover{
+    background: #deb8b8;
+}
+
+.onDragDelete svg{
+    color: black;
+    font-size: 1.5rem;
+    position: absolute;
+    z-index: 100000;
+    left: 50%;
+    top: 50%;
+}
+
+.onDragDelete:hover > svg {
+    color: crimson;
+}
+
+.onDragDelete:hover > svg > path{
+    transform-origin: center;
+    transform: scale(1.5);
+    transition: all .3s ease-in-out;
+}
+
+.onDragDelete div{
+    position: relative!important;
+    z-index: 100!important;
 }

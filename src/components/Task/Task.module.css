@@ -11,6 +11,17 @@
     padding: 4px 12px;
     border-radius: 10px;
     width: 90%;
+    transition: background-color 2s, transform 2s;
+}
+
+.container > div{
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+}
+
+.container button{
+    padding-left: 0;
 }
 
 .taskChecked{
@@ -26,6 +37,11 @@
     padding: 4px 12px;
     border-radius: 10px;
     width: 90%;
+    transition: background-color 1s ease-out;
+}
+
+.taskChecked:hover, .container:hover{
+    background-color: #c4b5b8;
 }
 
 h1{
@@ -43,4 +59,47 @@ h1{
 
 .todo p{
     margin-top: -12px;
+}
+
+.taskElem:hover{
+    background: chocolate;
+}
+
+
+.inputHidden{
+    display: none;
+}
+.inputVisible{
+    display: block;
+    background-color: transparent;
+}
+.taskContainer input {
+    border: none;
+    font-size: 1.6rem;
+    margin-top: 1rem;
+}
+.taskContainer input:focus {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    margin-top: 1rem;
+}
+
+.todoTitle{
+    display: block;
+    font-size: 1.6rem;
+}
+.todoTitleHidden{
+    display: none;
+}
+
+.addedAt{
+    width: 100%;
+}
+
+.hiddenBtn{
+    display: none;
+}
+.visibleBtn{
+    display: block;
 }

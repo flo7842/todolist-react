@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import style from './AddTodo.module.css'
 import Button from '../Button/Button';
+
+
 
 const AddTodo = (props) => {
 
@@ -10,9 +12,33 @@ const AddTodo = (props) => {
     const [styleOfBtn, setStyleOfBtn] = useState(style.btndisabled)
     const [disableBtn, setDisableBtn] = useState(true)
 
+
+    
+
+    const addTask = () => {
+        fetch('http://localhost:3000/task/', {headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          method: "POST",
+          body: JSON.stringify({inputText})}).then(function(response) {
+            // The response is a Response instance.
+            // You parse the data into a useable format using `.json()`
+            return response.json();
+         }).then(function(data) {
+            // `data` is the parsed version of the JSON returned from the above endpoint.
+            console.log('data',data); // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+            
+            props.onAddTodo(data.inputText)
+
+            setInputText('')
+         });
+        
+    }
+
     const handleChange = (e) => {
         setInputText(e.target.value)
-
+        
         if(e.target.value.length > 0 && e.target.value.length < 3 || e.target.value.length > 20){
             setStyleOfInput(style.invalidInput)
             setStyleOfBtn(style.btndisabled)
@@ -30,9 +56,7 @@ const AddTodo = (props) => {
         
     }
 
-    const handleClick = () => {
-        props.onAddTodo(inputText)
-    }
+    
 
     return (
         <div className={style.addTodo}>
@@ -43,7 +67,7 @@ const AddTodo = (props) => {
                     value={inputText}
                     placeholder="Aujourd'hui je fais..."
                 />
-                <Button onHandleClick={handleClick} disableBtn={disableBtn} btnStyle={styleOfBtn} />
+                <Button disableBtn={disableBtn} btnStyle={styleOfBtn} postLogin={addTask} />
             </form>
         </div>
     );

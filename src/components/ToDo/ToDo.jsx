@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Task from '../Task/Task';
 import style from './ToDo.module.css'
 import Button from '../Button/Button';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import AddTodo from '../AddTodo/AddTodo';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const ToDo = (props) => {
     const [idNumber, setIdNumber] = useState(0)
@@ -18,7 +18,19 @@ const ToDo = (props) => {
     let monthDate = dateObject.getMonth() + 1
     let dateDay = dayDate + '/' + monthDate + ' à ' + dateObject.getHours() + 'h'
 
+    const fetchUser = async () => {
+        const response = await fetch('http://localhost:8000/api/tasks')
+        if(!response.ok) {
+          throw Error("Une erreur est survenue, veuillez réesayer")
+        }
+        return response.json()
+    }
+    useEffect(() => {
+        fetchUser().then(task => setQuery(task))
+    }, []);
+    
     const handleAddTodo = (inputText) => {
+        console.log('length of query',query.length)
         setQuery([...query, {id: query.length + 1, inputText: inputText, dateDay: dateDay}])
     }
     
@@ -39,6 +51,30 @@ const ToDo = (props) => {
             setQuery(removeElem)
         }
         
+    }
+
+    const updateTask = (index,input, e) => {
+        console.log('input', input)
+        
+        console.log('query', query);
+        let newArr = [...query]; // copying the old datas array
+        console.log('newArr 1', newArr);
+        let item = {id: index, inputText: input, dateDay: dateDay}; // replace e.target.value with whatever you want to change it to
+        //console.log('newArr[index]', newArr[index])
+        newArr[newArr.findIndex(el => el.id === item.id)] = item;
+        // let i = newArr.findIndex(x => x.id === index)
+        // const [removed] = newArr.splice(i, 1);
+        // console.log('newArr 2', newArr);
+        
+        // console.log('removed', removed)
+       
+        // console.log('i', i)
+        // newArr.splice(i-1, 1, removed)
+        // //newArr.splice(index, 1)
+        
+        // console.log('newArr 4', newArr);
+        // console.log('query2', query);
+        setQuery(newArr);
     }
 
     const onRemoveDragEnd = (result) => {
@@ -74,7 +110,13 @@ const ToDo = (props) => {
                                         {...provided.draggableProps}
                                         {...provided.dragHandleProps}>
 
-                                        <Task key={index} item={item} isDraggingOver={snapshot}/>
+                                        <Task 
+                                            key={index} 
+                                            item={item} 
+                                            isDraggingOver={snapshot} 
+                                            id={item.id}
+                                            updateTask={updateTask}
+                                        />
                                     </div>
                                 )}
                             </Draggable>
@@ -84,13 +126,15 @@ const ToDo = (props) => {
                 )}
                 </Droppable>
                 <Droppable droppableId="onRemoveDragEnd">
-                {(provided, snapshot) => (
-                    
-                    <div className={style.onDragDelete} {...provided.droppableProps} ref={provided.innerRef}>
+                    {(provided, snapshot) => (
                         
-                        {provided.placeholder}
-                    </div>
-                )}
+                        <div className={style.onDragDelete} {...provided.droppableProps} ref={provided.innerRef}>
+                            
+                            <FontAwesomeIcon icon={["fas", "trash-alt"]} />
+                            
+                            {provided.placeholder}
+                        </div>
+                    )}
                 </Droppable>
                 
             </DragDropContext>

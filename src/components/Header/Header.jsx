@@ -1,4 +1,5 @@
 import React from 'react';
+import Navbar from '../Navbar/Navbar';
 import style from './Header.module.css'
 
 const Header = () => {
@@ -6,7 +7,7 @@ const Header = () => {
         <div>
             <div className={style.todoHead}>
                 <p className={style.firstp}>TODOLIST</p>
-                <p className={style.secondp}>T</p>
+                <Navbar />
             </div>
             
         </div>

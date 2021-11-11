@@ -3,9 +3,27 @@ import './App.css';
 import ToDo from './components/ToDo/ToDo';
 import { useEffect, useState } from 'react';
 import Layout from './components/Layout/Layout';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+import { faBin, faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons'
+
+library.add(fab, faTrashAlt, faEdit)
+
+// Sert pour le mock Api
+// const fetchUser = async () => {
+//   const response = await fetch('http://localhost:3000/user')
+//   if(!response.ok) {
+//     throw Error("Une erreur est survenue, veuillez réesayer")
+//   }
+//   return response.json()
+// }
+
 
 function App() {
+  const [username, setUsername] = useState(null)
+  const [status, setStatus] = useState('Loading')
   const [minute, setMinute] = useState(null);
+  
 
   const dateFrm = () => {
     let dateNow = new Date();
@@ -18,14 +36,18 @@ function App() {
 
   const handleOclock = () => {
     
-    setMinute(dateFrm)
+    setMinute('dateFrm')
   }
   
   useEffect(() => {
+
+    
+
+
     let intervalId
     intervalId = setInterval(handleOclock, 1000)
     return () => clearInterval(intervalId)
-  }, [])
+  }, [minute])
 
   return (
     <div className="App">
