@@ -1,10 +1,15 @@
 import React, { Fragment } from 'react';
 import style from './Navbar.module.css'
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
 
     const onHandlerAuthentication = () => {
         
+    }
+
+    const onLoginUser = () => {
+
     }
 
     return (
@@ -13,7 +18,7 @@ const Navbar = () => {
             <nav className={style.navbar}>
                 <ul>
                     <li onClick={onHandlerAuthentication}>Signin</li>
-                    <li>SignUp</li>
+                       <Link to="/login">SignUp</Link>
                     <li>Logout</li>
                 </ul>
             </nav>

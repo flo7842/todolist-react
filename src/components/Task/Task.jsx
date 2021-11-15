@@ -4,18 +4,47 @@ import style from './Task.module.css'
 import PropTypes from 'prop-types';
 import EditBtn from '../EditBtn/EditBtn';
 import InputEdit from '../InputEdit/InputEdit';
+import axios from 'axios';
 
 const Task = (props) => {
 
-    const [todo, setTodo] = useState(false)
+    const [todo, setTodo] = useState(props.item.status)
     const [inputUpdate, setInputUpdate] = useState('')
     const [visibleInput, setVisibleInput] = useState(style.inputHidden)
     const [visibleBtn, setVisibleBtn] = useState(style.hiddenBtn)
     const [todoTitle, setTodoTitle] = useState(style.todoTitle)
+    let userId = props.item.id
+    let config = {
+        headers: {
+          'Authorization': 'Bearer ' + props.authUser.token
+        }
+      }
+      //console.log(props.)
 
-    const handleClick = () => {
-        setTodo(!todo)
-    } 
+    // useEffect(() => {
+        
+    //     console.log('Le premier todo', todo) 
+    // }, [todo])
+
+    
+    const handleClick = async (props) => {
+            console.log('props', props.target.checked)
+
+            await setTodo(!todo)
+            console.log('fonction onchange', todo)
+        
+        try{
+            await axios
+                .put('http://localhost:8000/api/tasks/' + userId, {status: props.target.checked}, config)
+                .then(response => {
+                    console.log(response)
+                })
+        }catch(error){
+            console.log(error)
+        }
+    }
+
+
 
     const handleDblClick = (input) => {
       
@@ -45,10 +74,7 @@ const Task = (props) => {
         setVisibleBtn(style.hiddenBtn)
     }
 
-    useEffect(() => {
-        console.log('props get', props.item.title)
-    })
-
+   
     var d = new Date(props.item.createdAt);
     var n = d.toLocaleString('fr-FR');
     var dateFrSplit = n.split(",")
@@ -73,7 +99,7 @@ const Task = (props) => {
                         />
                         <p className={style.addedAt}>Ajouté le {dateFr}</p>
                     </div>
-                    <Checkbox clickHandler={handleClick} isChecked={props.item.status}/>
+                    <Checkbox clickHandler={handleClick} isChecked={todo}/>
                 </div> : 'Aucune tache définis'
             }
         </div>

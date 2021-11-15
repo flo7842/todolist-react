@@ -1,0 +1,14 @@
+.container{
+    max-width: 500px;
+    margin: auto;
+}
+
+.inputLogin{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 62px;
+}
+.btnLogin{
+    background: yellow;
+}
