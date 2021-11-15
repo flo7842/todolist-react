@@ -6,6 +6,7 @@ import Layout from './components/Layout/Layout';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { faBin, faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons'
+import { BrowserRouter } from 'react-router-dom';
 
 library.add(fab, faTrashAlt, faEdit)
 
@@ -51,13 +52,11 @@ function App() {
 
   return (
     <div className="App">
-      <Layout>
-        <ToDo 
-          title="Faire une app en React" 
-          date="Ajouté le 2/09 à 10h"
-          minute={minute}
-        />
-      </Layout>
+      <BrowserRouter>
+        <Layout>
+
+        </Layout>
+      </BrowserRouter>
     </div>
   );
 }

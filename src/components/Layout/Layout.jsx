@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 
