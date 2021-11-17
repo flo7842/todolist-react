@@ -6,10 +6,13 @@ import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import AddTodo from '../AddTodo/AddTodo';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useNavigate } from 'react-router';
+import axios from 'axios';
 
 
 const ToDo = (props) => {
     const [query, setQuery] = useState([])
+    
+    const [visibleTask, setVisibleTask] = useState('')
     const navigate = useNavigate();
 
     let dateObject = new Date();
@@ -25,7 +28,8 @@ const ToDo = (props) => {
                 method: 'GET', 
                 headers: new Headers({
                   'Authorization': 'Bearer ' + authUser.token,
-                  'Content-Type': 'application/json'
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json'
                 })})
             
             if(response.status === 401) {
@@ -39,61 +43,89 @@ const ToDo = (props) => {
 
     }
     
-    
-
     useEffect(() => {
         if(authUser !== null){
             fetchUser().then(tasks => {
-                setQuery(tasks['hydra:member'])
+                setQuery(tasks)
             })
         }else{
             navigate('/login')
         }
+
+
+       
+
+
+
+
     }, []);
     
     const handleAddTodo = (inputText) => {
         setQuery([...query, {id: query.length + 1, inputText: inputText, dateDay: dateDay}])
     }
     
-    const onDragEnd = (result) => {
+
+
+    const onDragEnd = async (result) => {
         if (!result.destination) {
             return;
         }
         
-        const newItems = [...query];
-        const [removed] = newItems.splice(result.source.index, 1);
+       
+        let config = {
+            headers: {
+              'Authorization': 'Bearer ' + authUser.token
+            }
+        }
+       
+        
+        
+
+        
         const removeElem = [...query]
         
-        newItems.splice(result.destination.index, 0, removed);
-        setQuery(newItems)
+        const people = removeElem.filter(function(person) { 
+            return person.id !== parseInt(result.draggableId) 
+        })
+        console.log('toto2', people)
+        setQuery(people)
+        setVisibleTask(style.tasks)
         
         if(result.destination.droppableId === "onRemoveDragEnd"){
-            removeElem.splice(result.destination.index, 1)
-            setQuery(removeElem)
+            try{
+                await axios
+                    .delete('http://localhost:8000/api/tasks/' + parseInt(result.draggableId), config)
+                    .then(response => {
+                        console.log(response)
+                    })
+            }catch(error){
+                console.log(error)
+            }
         }
         
     }
+    
 
     const updateTask = (index,input, e) => {
         let newArr = [...query];
-        
         let item = {id: index, inputText: input, dateDay: dateDay};
+
         newArr[newArr.findIndex(el => el.id === item.id)] = item;
-        
+
         setQuery(newArr);
     }
 
-    const onRemoveDragEnd = (result) => {
-        if (!result.destination) {
-            return;
-        }
-        
-        const newItems = [...query];
-        const [removed] = newItems.splice(result.source.index, 1);
-     
-        newItems.splice(result.destination.index, removed);
-        setQuery(newItems)
-    }
+    // const onRemoveDragEnd = async (result) => {
+    //     if (!result.destination) {
+    //         return;
+    //     }
+    //     console.log('tototottototototoottotototot')
+    //     const newItems = [...query];
+    //     const [removed] = newItems.splice(result.source.index, 1);
+
+    //     newItems.splice(result.destination.index, removed);
+    //     setQuery(newItems)
+    // }
 
     return (
         <div>
@@ -116,9 +148,10 @@ const ToDo = (props) => {
                                         {...provided.dragHandleProps}>
 
                                         <Task 
-                                            key={index} 
+                                            key={index}
+                                            classTask={visibleTask}
                                             item={item} 
-                                            isDraggingOver={snapshot} 
+                                            isDraggingOver={snapshot}
                                             id={item.id}
                                             updateTask={updateTask}
                                             authUser={authUser}

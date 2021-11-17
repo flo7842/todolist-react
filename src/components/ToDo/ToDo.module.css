@@ -26,6 +26,10 @@ h1{
     margin: auto;
 }
 
+.tasks{
+    display: none;
+}
+
 .onDragDelete {
     width: 95%;
     height: 150px;
